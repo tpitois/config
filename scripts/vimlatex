@@ -1,0 +1,19 @@
+#!/bin/sh
+
+read -p "Latex's project name: " name
+cd ~/Documents/latex/
+while [ -z $loop ] ; do
+	if mkdir $name ; then
+		loop=0
+		cp template.tex $name/$name.tex
+		cd $name
+		vim $name.tex
+	else
+		read -p "Do you want overwrite this repository? [Y/n] " remove
+		if [ $remove = 'Y' ] || [ $remove = 'y' ] ; then
+			rm -r $name
+		else
+			read -p "Latex's project name: " name
+		fi
+	fi
+done
